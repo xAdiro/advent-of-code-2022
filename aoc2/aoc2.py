@@ -8,7 +8,7 @@ VALUES = {
     "Z": 3
 }
 
-BEATS = {
+LOSES_TO = {
     "X": "C",
     "Y": "A",
     "Z": "B",
@@ -17,7 +17,7 @@ BEATS = {
     "C": "Y"
 }
 
-LOSES = {
+WINS_TO = {
     "A": "Y",
     "B": "Z",
     "C": "X"
@@ -47,7 +47,7 @@ def part1():
 
         if DRAWS[my_move] == their_move:
             score += 3
-        elif BEATS[my_move] == their_move:
+        elif LOSES_TO[my_move] == their_move:
             score += 6
 
     print(score)
@@ -66,12 +66,12 @@ def part2():
 
         match result:
             case "X":
-                my_move = BEATS[their_move]
+                my_move = LOSES_TO[their_move]
             case "Y":
                 my_move = DRAWS[their_move]
                 score += 3
             case "Z":
-                my_move = LOSES[their_move]
+                my_move = WINS_TO[their_move]
                 score += 6
 
         score += VALUES[my_move]
