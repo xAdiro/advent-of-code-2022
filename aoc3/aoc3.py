@@ -2,19 +2,7 @@ from typing import Tuple, List
 
 
 def part1():
-    with open("input.txt") as f:
-        sacks = f.read().splitlines()
-
-    repeated: List[str] = []
-
-    for sack in sacks:
-        half1, half2 = get_compartments(sack)
-        for item in half1:
-            if item in half2:
-                repeated.append(item)
-                break
-
-    print(sum(get_priority(item) for item in repeated))
+    with open("input.txt") as f: print(sum(ascii_code - 38 if 90 >= ascii_code >= 65 else ascii_code - 96 for ascii_code in [ord(item.pop()) for item in [set(half1).intersection(half2) for half1, half2 in [(sack[:len(sack)//2], sack[-len(sack)//2:]) for sack in f.read().splitlines()]]]))
 
 
 def part2():
@@ -39,12 +27,6 @@ def get_priority(item: str) -> int:
         return ascii_code - 96
 
     raise ValueError(f"Wrong value: {item} with code {ascii_code}")
-
-
-def get_compartments(rucksack: str) -> Tuple[str, str]:
-    size = len(rucksack)
-
-    return rucksack[:size//2], rucksack[-size//2:]
 
 
 if __name__ == "__main__":
