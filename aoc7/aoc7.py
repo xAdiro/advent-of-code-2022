@@ -1,7 +1,6 @@
-from typing import List
+from typing import List, Tuple
 
 from directory import Directory
-from file import File
 
 
 def part1():
@@ -24,7 +23,7 @@ def part2():
     print(min([directory for directory in dirs if directory.get_size() >= space_to_remove], key=lambda x: x.get_size()).get_size())
 
 
-def get_commands_and_outputs():
+def get_commands_and_outputs() -> Tuple[List[str], List[List[str]]]:
     with open("input.txt") as f:
         lines = f.read().splitlines()
 
@@ -44,9 +43,7 @@ def get_commands_and_outputs():
     return commands, outputs
 
 
-def get_filesystem(commands: List[str], outputs: List[str]) -> Directory:
-    commands, outputs = get_commands_and_outputs()
-
+def get_filesystem(commands: List[str], outputs: List[List[str]]) -> Directory:
     top_dir = Directory("/")
     current_dir = top_dir
     for command, output in zip(commands[1:], outputs[1:]):
